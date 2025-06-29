@@ -24,7 +24,10 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       children: [
         Row(
           // crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment:
+              Localizations.localeOf(context).languageCode == 'ar'
+              ? MainAxisAlignment.end
+              : MainAxisAlignment.start,
           children: [SvgPicture.asset(Assets.assetsImagesPlant)],
         ),
         SvgPicture.asset(Assets.assetsImagesLogo),
