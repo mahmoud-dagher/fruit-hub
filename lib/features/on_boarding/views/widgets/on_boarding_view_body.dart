@@ -4,6 +4,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:fruits_hub/core/utils/styles/app_colors.dart';
 import 'package:fruits_hub/core/widgets/custom_button.dart';
+import 'package:fruits_hub/features/auth/views/login_view.dart';
 import 'package:fruits_hub/features/on_boarding/views/widgets/on_boarding_pageview.dart';
 
 class OnBoardingViewBody extends StatefulWidget {
@@ -56,7 +57,12 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           visible: currentPage == 1 ? true : false,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: GeneralButton(onTap: () {}, text: 'ابدأ الان'),
+            child: GeneralButton(
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed(LoginView.routName);
+              },
+              text: 'ابدأ الان',
+            ),
           ),
         ),
         const SizedBox(height: 43),
