@@ -16,8 +16,8 @@ class OnBoardingPageview extends StatelessWidget {
           isVisible: pageController.hasClients
               ? pageController.page?.round() == 0
               : true,
-          image: Assets.assetsImagesPageViewItem1Image,
-          backgroundImage: Assets.assetsImagesPageViewItem1Background,
+          image: Assets.imagesPageViewItem1Image,
+          backgroundImage: Assets.imagesPageViewItem1Background,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -43,8 +43,8 @@ class OnBoardingPageview extends StatelessWidget {
           isVisible: pageController.hasClients
               ? pageController.page?.round() == 0
               : false,
-          image: Assets.assetsImagesPageViewItem2Image,
-          backgroundImage: Assets.assetsImagesPageViewItem2Background,
+          image: Assets.imagesPageViewItem2Image,
+          backgroundImage: Assets.imagesPageViewItem2Background,
           title: const Text(
             'ابحث وتسوق',
             style: TextStyle(

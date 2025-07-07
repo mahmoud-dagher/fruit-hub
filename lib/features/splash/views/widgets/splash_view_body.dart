@@ -28,13 +28,13 @@ class _SplashViewBodyState extends State<SplashViewBody> {
               Localizations.localeOf(context).languageCode == 'ar'
               ? MainAxisAlignment.end
               : MainAxisAlignment.start,
-          children: [SvgPicture.asset(Assets.assetsImagesPlant)],
+          children: [SvgPicture.asset(Assets.imagesPlant)],
         ),
-        SvgPicture.asset(Assets.assetsImagesLogo),
+        SvgPicture.asset(Assets.imagesLogo),
         Expanded(
           child: Flexible(
             child: SvgPicture.asset(
-              Assets.assetsImagesSplashBottom,
+              Assets.imagesSplashBottom,
               fit: BoxFit.fill,
             ),
           ),

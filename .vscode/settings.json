@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
         "Localizely",
-        "Subtags"
-    ]
+        "Subtags",
+        "الدخول",
+        "تسجيل"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
