@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:fruits_hub/core/helper_functions/on_generate_route.dart';
 import 'package:fruits_hub/core/services/shared_preferences_singleton.dart';
@@ -6,9 +8,21 @@ import 'package:fruits_hub/features/splash/views/splash_view.dart';
 import 'package:fruits_hub/generated/l10n.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    print('Firebase initialized successfully');
+  } catch (e) {
+    print('Firebase initialization error: $e');
+  }
+
   await SharedPref.init();
   runApp(const FruitHub());
 }
