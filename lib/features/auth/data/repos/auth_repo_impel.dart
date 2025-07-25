@@ -6,27 +6,61 @@ import 'package:fruits_hub/features/auth/data/models/user_model.dart';
 import 'package:fruits_hub/features/auth/domain/entities/user_entity.dart';
 import 'package:fruits_hub/features/auth/domain/repos/auth_repo.dart';
 
-class AuthRepoImpel extends AuthRepo {
+class AuthRepoImpl extends AuthRepo {
   final FirebaseAuthService firebaseAuthService;
 
-  AuthRepoImpel({required this.firebaseAuthService});
+  AuthRepoImpl({required this.firebaseAuthService});
+
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
     String email,
     String password,
     String name,
-    String uId,
   ) async {
     try {
-      var user = await firebaseAuthService.createUserWithEmailAndPassword(
+      final user = await firebaseAuthService.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       return right(UserModel.fromFirebaseUser(user));
     } on CustomException catch (e) {
       return left(ServerFailure(message: e.message));
-    } catch (e) {
+    } catch (_) {
       return left(ServerFailure(message: 'Unknown error occurred'));
     }
   }
+}
+
+class BackEndAuthImpl extends AuthRepo {
+  final FirebaseAuthService firebaseAuthService;
+
+  BackEndAuthImpl({required this.firebaseAuthService});
+
+  @override
+  Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
+    String email,
+    String password,
+    String name,
+  ) async {
+    try {
+      final user = await firebaseAuthService.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return right(UserModel.fromFirebaseUser(user));
+    } on CustomException catch (e) {
+      return left(ServerFailure(message: e.message));
+    } catch (_) {
+      return left(ServerFailure(message: 'Unknown error occurred'));
+    }
+  }
+}
+
+@override
+Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
+  String email,
+  String password,
+  String name,
+) async {
+  return left(ServerFailure(message: 'Back-end auth not implemented yet.'));
 }

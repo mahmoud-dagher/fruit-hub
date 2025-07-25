@@ -6,34 +6,39 @@ import 'package:fruits_hub/core/utils/styles/text_style.dart';
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
-    required this.hint,
+
     this.suffixIcon,
     this.prefixIcon,
     required this.inputType,
     this.onSaved,
     this.onChanged,
-    this.maxLines,
+
     this.useFloatingLabel = false,
     this.backgroundColor,
     this.controller,
+    this.obscureText = false,
+
+    this.hint,
   });
 
-  final String? hint;
-  final IconData? suffixIcon;
+  final Widget? suffixIcon;
   final IconData? prefixIcon;
-  final TextInputType? inputType;
+  final String? hint;
+  final TextInputType inputType;
   final void Function(String?)? onSaved;
   final ValueSetter<String>? onChanged;
-  final int? maxLines;
+
   final bool useFloatingLabel;
   final Color? backgroundColor;
   final TextEditingController? controller;
+  final bool obscureText;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      key: Key(hint!),
+      key: Key(hint.toString()),
       keyboardType: inputType,
-      obscureText: hint == 'Enter Password' ? true : false,
+      obscureText: obscureText,
 
       onSaved: onSaved,
       validator: (value) {
@@ -44,7 +49,6 @@ class CustomTextFormField extends StatelessWidget {
       },
       onChanged: onChanged,
       controller: controller,
-      maxLines: maxLines,
       style: const TextStyle(overflow: TextOverflow.ellipsis),
       decoration: InputDecoration(
         filled: true,
@@ -57,9 +61,7 @@ class CustomTextFormField extends StatelessWidget {
         labelStyle: const TextStyle(color: null),
         hintStyle: TextStyles.bold13.copyWith(color: const Color(0xFF949D9E)),
         prefixIcon: prefixIcon != null ? Icon(prefixIcon, color: null) : null,
-        suffixIcon: suffixIcon != null
-            ? Icon(suffixIcon, color: const Color(0xffC9CECF))
-            : null,
+        suffixIcon: suffixIcon,
       ),
     );
   }

@@ -1,10 +1,11 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub/core/cubits/signup_cubit/signup_states.dart';
 import 'package:fruits_hub/features/auth/domain/repos/auth_repo.dart';
 
 class SignupCubit extends Cubit<SignupStates> {
-  SignupCubit(super.initialState, this.authRepo);
   final AuthRepo authRepo;
+  SignupCubit(this.authRepo) : super(SignupInitial());
+
   Future<void> createUserWithEmailAndPassword(
     String email,
     String password,

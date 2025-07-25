@@ -3,9 +3,10 @@ import 'package:fruits_hub/core/utils/app_images.dart';
 import 'package:fruits_hub/core/utils/styles/app_colors.dart';
 import 'package:fruits_hub/core/utils/styles/text_style.dart';
 import 'package:fruits_hub/core/widgets/custom_button.dart';
-import 'package:fruits_hub/core/widgets/custom_text_formField.dart';
+import 'package:fruits_hub/core/widgets/custom_text_form_field.dart';
 import 'package:fruits_hub/core/widgets/dont_have_account.dart';
 import 'package:fruits_hub/core/widgets/or_divider.dart';
+import 'package:fruits_hub/core/widgets/password_field.dart';
 import 'package:fruits_hub/core/widgets/social_login_button.dart';
 
 class LoginViewBody extends StatelessWidget {
@@ -24,11 +25,7 @@ class LoginViewBody extends StatelessWidget {
               inputType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 16),
-            const CustomTextFormField(
-              suffixIcon: Icons.remove_red_eye,
-              hint: 'كلمة المرور',
-              inputType: TextInputType.visiblePassword,
-            ),
+            const PasswordField(),
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
