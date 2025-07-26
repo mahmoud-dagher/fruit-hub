@@ -31,32 +31,23 @@ class AuthRepoImpl extends AuthRepo {
       return left(ServerFailure(message: 'Unknown error occurred'));
     }
   }
-}
-
-class BackEndAuthImpl extends AuthRepo {
-  final FirebaseAuthService firebaseAuthService;
-
-  BackEndAuthImpl({required this.firebaseAuthService});
 
   @override
-  Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
+  Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
     String email,
     String password,
-    String name,
   ) async {
     try {
-      final user = await firebaseAuthService.createUserWithEmailAndPassword(
+      final user = await firebaseAuthService.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
       return right(UserModel.fromFirebaseUser(user));
     } on CustomException catch (e) {
-      return left(ServerFailure(message: e.message));
-    } catch (e) {
-      log(
-        'Exception in AuthRepoImpl.createUserWithEmailAndPassword: ${e.toString()}',
+      log('Exception in signInWithEmailAndPassword: ${e.message}');
+      return left(
+        ServerFailure(message: 'حدث خطأ ما . يرجى المحاولة مرة أخرى'),
       );
-      return left(ServerFailure(message: 'Unknown error occurred'));
     }
   }
 }
