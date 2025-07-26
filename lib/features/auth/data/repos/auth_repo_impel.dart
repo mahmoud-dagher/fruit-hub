@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:fruits_hub/core/errors/exceptions.dart';
 import 'package:fruits_hub/core/errors/failures.dart';
@@ -50,7 +52,10 @@ class BackEndAuthImpl extends AuthRepo {
       return right(UserModel.fromFirebaseUser(user));
     } on CustomException catch (e) {
       return left(ServerFailure(message: e.message));
-    } catch (_) {
+    } catch (e) {
+      log(
+        'Exception in AuthRepoImpl.createUserWithEmailAndPassword: ${e.toString()}',
+      );
       return left(ServerFailure(message: 'Unknown error occurred'));
     }
   }
