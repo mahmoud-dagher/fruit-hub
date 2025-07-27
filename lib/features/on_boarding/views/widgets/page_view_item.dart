@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruits_hub/core/utils/styles/text_style.dart';
-import 'package:fruits_hub/features/auth/views/login_view.dart';
+import 'package:fruits_hub/features/auth/views/signin-view.dart';
 
 class PageViewItem extends StatelessWidget {
   const PageViewItem({
@@ -43,7 +43,7 @@ class PageViewItem extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(
                         context,
-                      ).pushReplacementNamed(LoginView.routName);
+                      ).pushReplacementNamed(SignInView.routName);
                     },
                     child: Text(
                       'تخط',

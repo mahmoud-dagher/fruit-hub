@@ -10,8 +10,6 @@ final getIt = GetIt.instance;
 void setupGetIt() {
   getIt.registerSingleton<FirebaseAuthService>(FirebaseAuthService());
   getIt.registerSingleton<AuthRepo>(
-    BackEndAuthImpl(firebaseAuthService: getIt<FirebaseAuthService>()),
+    AuthRepoImpl(firebaseAuthService: getIt<FirebaseAuthService>()),
   );
-
-  // Alternatively you could write it if you don't like global variables
 }
