@@ -26,9 +26,8 @@ class AuthRepoImpl extends AuthRepo {
       );
       return right(UserModel.fromFirebaseUser(user));
     } on CustomException catch (e) {
-      return left(ServerFailure(message: e.message));
-    } catch (_) {
-      return left(ServerFailure(message: 'Unknown error occurred'));
+      log('Exception in createUserWithEmailAndPassword: ${e.message}');
+      return left(ServerFailure('  حدث خطأ ما. الرجاء المحاولة مرة اخرى.'));
     }
   }
 
@@ -42,21 +41,35 @@ class AuthRepoImpl extends AuthRepo {
         email: email,
         password: password,
       );
+      if (user == null) {
+        return left(ServerFailure('فشل تسجيل الدخول. المستخدم غير موجود.'));
+      }
       return right(UserModel.fromFirebaseUser(user));
     } on CustomException catch (e) {
       log('Exception in signInWithEmailAndPassword: ${e.message}');
-      return left(
-        ServerFailure(message: 'حدث خطأ ما . يرجى المحاولة مرة أخرى'),
-      );
+      return left(ServerFailure('حدث خطأ ما. الرجاء المحاولة مرة اخرى.'));
     }
   }
-}
 
-@override
-Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
-  String email,
-  String password,
-  String name,
-) async {
-  return left(ServerFailure(message: 'Back-end auth not implemented yet.'));
+  @override
+  Future<Either<Failure, UserEntity>> signInWithGoogle() async {
+    try {
+      var user = await firebaseAuthService.signInWithGoogle();
+      return right(UserModel.fromFirebaseUser(user.user!));
+    } catch (e) {
+      log('Exception in signInWithGoogle: ${e.toString()}');
+      return left(ServerFailure('حد ث خطاءما يرجى المحاولة مرة اخرى'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> signInWithFacebook() async {
+    try {
+      var user = await firebaseAuthService.signInWithFacebook();
+      return right(UserModel.fromFirebaseUser(user.user!));
+    } catch (e) {
+      log('Exception in signInWithFacebook: ${e.toString()}');
+      return left(ServerFailure('حد ث خطاءما يرجى المحاولة مرة اخرى'));
+    }
+  }
 }
